@@ -20,7 +20,7 @@ import dmc.tm.utils.DateUtils;
 import dmc.tm.vo.ItemVo;
 
 @RestController
-@RequestMapping("/api/day")
+@RequestMapping("/api/item")
 final class ItemRest {
 
 	private final ItemService service;
