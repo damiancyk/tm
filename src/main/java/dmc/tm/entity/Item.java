@@ -1,20 +1,20 @@
-package dmc.tm.vo;
+package dmc.tm.entity;
 
 import java.util.Date;
 
-public final class DayVo {
+import org.springframework.data.annotation.Id;
 
+public final class Item {
+
+	@Id
 	private String id;
 	private String idUser;
 	private Date start;
 	private Date end;
+	private Long diff;
 	private String title;
 	private String description;
 	private Date created;
-
-	public DayVo() {
-
-	}
 
 	public String getId() {
 		return id;
@@ -46,6 +46,14 @@ public final class DayVo {
 
 	public void setEnd(Date end) {
 		this.end = end;
+	}
+
+	public Long getDiff() {
+		return diff;
+	}
+
+	public void setDiff(Long diff) {
+		this.diff = diff;
 	}
 
 	public String getTitle() {

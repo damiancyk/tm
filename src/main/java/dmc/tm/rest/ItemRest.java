@@ -15,58 +15,51 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import dmc.tm.exception.EntityNotFoundException;
-import dmc.tm.service.DayService;
+import dmc.tm.service.ItemService;
 import dmc.tm.utils.DateUtils;
-import dmc.tm.vo.DayVo;
+import dmc.tm.vo.ItemVo;
 
 @RestController
 @RequestMapping("/api/day")
-final class DayRest {
+final class ItemRest {
 
-	private final DayService service;
+	private final ItemService service;
 
 	@Autowired
-	DayRest(DayService service) {
+	ItemRest(ItemService service) {
 		this.service = service;
 	}
 
 	@RequestMapping(method = RequestMethod.POST)
 	@ResponseStatus(HttpStatus.CREATED)
-	DayVo create(@RequestBody @Valid DayVo todoEntry) {
-		DayVo vo = service.create(todoEntry);
-		return vo;
+	ItemVo create(@RequestBody @Valid ItemVo vo) {
+		return service.create(vo);
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
-	DayVo delete(@PathVariable("id") String id) {
-		DayVo vo = service.delete(id);
-		return vo;
+	ItemVo delete(@PathVariable("id") String id) {
+		return service.delete(id);
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	List<DayVo> findAll() {
-		List<DayVo> vos = service.findAll();
-		return vos;
+	List<ItemVo> findAll() {
+		return service.findAll();
 	}
 
 	@RequestMapping(value = "/{idUser}/{start}/{end}", method = RequestMethod.GET)
-	List<DayVo> find(@PathVariable("idUser") String idUser, @PathVariable("start") Long start,
+	List<ItemVo> find(@PathVariable("idUser") String idUser, @PathVariable("start") Long start,
 			@PathVariable("end") Long end) {
-
-		List<DayVo> vos = service.find(idUser, DateUtils.getDate(start), DateUtils.getDate(end));
-		return vos;
+		return service.find(idUser, DateUtils.getDate(start), DateUtils.getDate(end));
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.GET)
-	DayVo findById(@PathVariable("id") String id) {
-		DayVo vo = service.findById(id);
-		return vo;
+	ItemVo findById(@PathVariable("id") String id) {
+		return service.findById(id);
 	}
 
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
-	DayVo update(@RequestBody @Valid DayVo todoEntry) {
-		DayVo vo = service.update(todoEntry);
-		return vo;
+	ItemVo update(@RequestBody @Valid ItemVo vo) {
+		return service.update(vo);
 	}
 
 	@ExceptionHandler

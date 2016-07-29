@@ -1,12 +1,9 @@
-package dmc.tm.entity;
+package dmc.tm.vo;
 
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
+public final class ItemVo {
 
-public final class Day {
-
-	@Id
 	private String id;
 	private String idUser;
 	private Date start;
@@ -14,6 +11,10 @@ public final class Day {
 	private String title;
 	private String description;
 	private Date created;
+
+	public ItemVo() {
+
+	}
 
 	public String getId() {
 		return id;

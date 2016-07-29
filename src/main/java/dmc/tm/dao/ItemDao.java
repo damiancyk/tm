@@ -7,19 +7,19 @@ import java.util.Optional;
 import org.springframework.data.mongodb.repository.Query;
 import org.springframework.data.repository.Repository;
 
-import dmc.tm.entity.Day;
+import dmc.tm.entity.Item;
 
-public interface DayDao extends Repository<Day, String> {
+public interface ItemDao extends Repository<Item, String> {
 
-	void delete(Day deleted);
+	void delete(Item entity);
 
-	List<Day> findAll();
+	List<Item> findAll();
 
-	Optional<Day> findOne(String id);
+	Optional<Item> findOne(String id);
 
-	Day save(Day saved);
+	Item save(Item entity);
 
 	@Query(value = "{ $and: [{ idUser: ?0 }, {start: { $gte: ?1, $lte: ?2 }}] }")
-	List<Day> find(String idUser, Date start, Date end);
+	List<Item> find(String idUser, Date start, Date end);
 
 }

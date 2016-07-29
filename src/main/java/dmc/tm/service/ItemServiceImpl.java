@@ -9,29 +9,30 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import dmc.tm.dao.DayDao;
-import dmc.tm.entity.Day;
+import dmc.tm.dao.ItemDao;
+import dmc.tm.entity.Item;
 import dmc.tm.exception.EntityNotFoundException;
-import dmc.tm.vo.DayVo;
+import dmc.tm.utils.DateUtils;
+import dmc.tm.vo.ItemVo;
 
 @Service
-final class DayServiceImpl implements DayService {
+final class ItemServiceImpl implements ItemService {
 
-	private final DayDao dao;
+	private final ItemDao dao;
 
 	@Autowired
-	DayServiceImpl(DayDao repository) {
+	ItemServiceImpl(ItemDao repository) {
 		this.dao = repository;
 	}
 
 	@Override
-	public DayVo create(DayVo vo) {
+	public ItemVo create(ItemVo vo) {
 		Date date = new Date();
 		vo.setCreated(date);
 		vo.setStart(date);
 		vo.setEnd(date);
 
-		Day entity = voToEntity(null, vo);
+		Item entity = voToEntity(null, vo);
 
 		entity = dao.save(entity);
 
@@ -39,44 +40,45 @@ final class DayServiceImpl implements DayService {
 	}
 
 	@Override
-	public DayVo update(DayVo vo) {
-		Day entity = findDayById(vo.getId());
+	public ItemVo update(ItemVo vo) {
+		Item entity = findEntityById(vo.getId());
 		entity = dao.save(entity);
 
 		return convertToVo(entity);
 	}
 
 	@Override
-	public DayVo delete(String id) {
-		Day deleted = findDayById(id);
-		dao.delete(deleted);
+	public ItemVo delete(String id) {
+		Item entity = findEntityById(id);
+		dao.delete(entity);
 
-		return convertToVo(deleted);
+		return convertToVo(entity);
 	}
 
 	@Override
-	public List<DayVo> findAll() {
-		List<Day> DayEntries = dao.findAll();
-
-		return convertToVos(DayEntries);
-	}
-
-	@Override
-	public List<DayVo> find(String idUser, Date start, Date end) {
-		List<Day> entities = dao.find(idUser, start, end);
+	public List<ItemVo> findAll() {
+		List<Item> entities = dao.findAll();
 
 		return convertToVos(entities);
 	}
 
-	public Day voToEntity(Day entity, DayVo vo) {
+	@Override
+	public List<ItemVo> find(String idUser, Date start, Date end) {
+		List<Item> entities = dao.find(idUser, start, end);
+
+		return convertToVos(entities);
+	}
+
+	public Item voToEntity(Item entity, ItemVo vo) {
 		if (entity == null) {
-			entity = new Day();
+			entity = new Item();
 		}
 
 		entity.setId(vo.getId());
 		entity.setIdUser(vo.getIdUser());
 		entity.setStart(vo.getStart());
 		entity.setEnd(vo.getEnd());
+		entity.setDiff(DateUtils.getDiff(vo.getStart(), vo.getEnd()));
 		entity.setTitle(vo.getTitle());
 		entity.setDescription(vo.getDescription());
 		entity.setCreated(vo.getCreated());
@@ -84,25 +86,25 @@ final class DayServiceImpl implements DayService {
 		return entity;
 	}
 
-	private List<DayVo> convertToVos(List<Day> models) {
+	private List<ItemVo> convertToVos(List<Item> models) {
 		return models.stream().map(this::convertToVo).collect(toList());
 	}
 
 	@Override
-	public DayVo findById(String id) {
-		Day entity = findDayById(id);
+	public ItemVo findById(String id) {
+		Item entity = findEntityById(id);
 
 		return convertToVo(entity);
 	}
 
-	private Day findDayById(String id) {
-		Optional<Day> result = dao.findOne(id);
+	private Item findEntityById(String id) {
+		Optional<Item> result = dao.findOne(id);
 		return result.orElseThrow(() -> new EntityNotFoundException(id));
 
 	}
 
-	private DayVo convertToVo(Day entity) {
-		DayVo vo = new DayVo();
+	private ItemVo convertToVo(Item entity) {
+		ItemVo vo = new ItemVo();
 
 		vo.setId(entity.getId());
 		vo.setIdUser(entity.getIdUser());
