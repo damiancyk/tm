@@ -14,6 +14,7 @@ public final class Item {
 	private Long diff;
 	private String title;
 	private String description;
+	private boolean note;
 	private Date created;
 
 	public String getId() {
@@ -70,6 +71,14 @@ public final class Item {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isNote() {
+		return note;
+	}
+
+	public void setNote(boolean note) {
+		this.note = note;
 	}
 
 	public Date getCreated() {

@@ -10,6 +10,7 @@ public final class ItemVo {
 	private Date end;
 	private String title;
 	private String description;
+	private boolean note;
 	private Date created;
 
 	public ItemVo() {
@@ -62,6 +63,14 @@ public final class ItemVo {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public boolean isNote() {
+		return note;
+	}
+
+	public void setNote(boolean note) {
+		this.note = note;
 	}
 
 	public Date getCreated() {
