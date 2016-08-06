@@ -9,12 +9,14 @@
 <meta name="description" content="timesheet manager" />
 <meta name="author" content="damiancyk" />
 
-<title>timesheet manager</title>
+<title>tm</title>
 
 <link rel="stylesheet" type="text/css" media="all"
 	th:href="@{/css/bootstrap/bootstrap.min.css}" />
 <link rel="stylesheet" type="text/css" media="all"
 	th:href="@{/css/bootstrap/sb-admin.css}" />
+<link rel="stylesheet" type="text/css" media="all"
+	th:href="@{/css/ng-table/ng-table.min.css}" />
 </head>
 
 <body ng-app="tm">
@@ -48,8 +50,11 @@
 	<script th:src="@{/js/angular/1.5.8/angular-sanitize.min.js}"></script>
 	<script th:src="@{/js/angular/1.5.8/angular-touch.min.js}"></script>
 	<script th:src="@{/js/bootstrap/ui-bootstrap-tpls-2.0.0.min.js}"></script>
-	<script th:src="@{/app/app.js}"></script>
-	<script th:src="@{/app/itemCtrl.js}"></script>
-	<script th:src="@{/app/exampleFormCtrl.js}"></script>
+	<script th:src="@{/js/ng-table/ng-table.min.js}"></script>
+	<script th:src="@{/app/module/tmModule.js}"></script>
+	<script th:src="@{/app/filter/translate.js}"></script>
+	<script th:src="@{/app/service/services.js}"></script>
+	<script th:src="@{/app/controller/itemCtrl.js}"></script>
+	<script th:src="@{/app/controller/exampleFormCtrl.js}"></script>
 </body>
 </html>
