@@ -7,7 +7,7 @@ app.config([ '$routeProvider', '$locationProvider', '$httpProvider',
 				templateUrl : 'view/itemList.html',
 				controller : 'itemListCtrl'
 			}).when('/', {
-				templateUrl : 'itemList.html',
+				templateUrl : 'view/itemList.html',
 				controller : 'itemListCtrl'
 			}).when('/example-form', {
 				templateUrl : 'view/exampleForm.html',

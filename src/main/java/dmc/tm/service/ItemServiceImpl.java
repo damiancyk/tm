@@ -29,8 +29,6 @@ final class ItemServiceImpl implements ItemService {
 	public ItemVo create(ItemVo vo) {
 		Date date = new Date();
 		vo.setCreated(date);
-		vo.setStart(date);
-		vo.setEnd(date);
 
 		Item entity = voToEntity(null, vo);
 
@@ -42,6 +40,7 @@ final class ItemServiceImpl implements ItemService {
 	@Override
 	public ItemVo update(ItemVo vo) {
 		Item entity = findEntityById(vo.getId());
+		entity = voToEntity(entity, vo);
 		entity = dao.save(entity);
 
 		return convertToVo(entity);

@@ -1,4 +1,54 @@
-app.service("TableService", function($http, $filter, NgTableParams) {
+app.factory("Data", [ '$http', function($http) {
+	var serviceBase = 'api/';
+
+	var obj = {};
+	obj.toast = function(data, options) {
+		var status = data.status;
+		var message = data.message;
+		if (status == 'ACCESSDENIED')
+			status = 'warning';
+
+		var delay = 4000;
+		if (options && options.delay) {
+			delay = options.delay;
+		}
+		toaster.pop(status, "", message, delay, 'trustedHtml');
+	};
+	obj.get = function(q, object) {
+		return $http.get(serviceBase + q, object).then(function(results) {
+			return results.data;
+		});
+	};
+	obj.post = function(q, object) {
+		if (typeof object === 'undefined') {
+			object = {};
+		}
+		return $http.post(serviceBase + q, object).then(function(results) {
+			return results.data;
+		});
+	};
+	obj.put = function(q, object) {
+		if (typeof object === 'undefined') {
+			object = {};
+		}
+		return $http.put(serviceBase + q, object).then(function(results) {
+			return results.data;
+		});
+	};
+	
+	obj.del = function(q, object) {
+		if (typeof object === 'undefined') {
+			object = {};
+		}
+		return $http.delete(serviceBase + q, object).then(function(results) {
+			return results.data;
+		});
+	};
+
+	return obj;
+} ]);
+
+app.service("TableService", function($http, $filter, NgTableParams, Data) {
 	var service = {
 		initStatic : function(data, searchCriteria) {
 			var parameters = {
@@ -91,17 +141,11 @@ app.service("TableService", function($http, $filter, NgTableParams) {
 			};
 			angular.merge(searchCriteria, paramsFilter);
 
-			// console.log(url);
-			// console.log(searchCriteria)
-
-			// Data.post(url, searchCriteria).then(function (resp)
-			// {
-			// params.total(resp.size);
-			// $defer.resolve(resp.results);
-			// }, function (result) {
-			// Data.toast({status: 'error', message: 'Błąd. Skontaktuj się z
-			// administratorem.'});
-			// });
+			Data.post(url, searchCriteria).then(function(resp) {
+				params.total(resp.size);
+				$defer.resolve(resp.results);
+			}, function(result) {
+			});
 		}
 	};
 	return service;
