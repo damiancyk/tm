@@ -75,9 +75,14 @@ final class ItemServiceImpl implements ItemService {
 
 		entity.setId(vo.getId());
 		entity.setIdUser(vo.getIdUser());
-		entity.setStart(vo.getStart());
-		entity.setEnd(vo.getEnd());
-		entity.setDiff(DateUtils.getDiff(vo.getStart(), vo.getEnd()));
+
+		Date start = DateUtils.strToDate(vo.getStart());
+		Date end = DateUtils.strToDate(vo.getEnd());
+
+		entity.setStart(start);
+		entity.setEnd(end);
+		entity.setDiff(DateUtils.getDiff(start, end));
+
 		entity.setTitle(vo.getTitle());
 		entity.setDescription(vo.getDescription());
 		entity.setCreated(vo.getCreated());
@@ -107,8 +112,8 @@ final class ItemServiceImpl implements ItemService {
 
 		vo.setId(entity.getId());
 		vo.setIdUser(entity.getIdUser());
-		vo.setStart(entity.getStart());
-		vo.setEnd(entity.getEnd());
+		vo.setStart(DateUtils.dateToStr(entity.getStart()));
+		vo.setEnd(DateUtils.dateToStr(entity.getEnd()));
 		vo.setTitle(entity.getTitle());
 		vo.setDescription(entity.getDescription());
 		vo.setCreated(entity.getCreated());

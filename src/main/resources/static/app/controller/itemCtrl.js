@@ -34,4 +34,16 @@ app.controller('itemListCtrl', [ '$scope', 'Data', function($scope, Data) {
 	}
 
 	$scope.list();
+
+	$scope.open = function(nr) {
+		$scope.opened[nr] = true;
+	};
+
+	$scope.opened = [];
+
+	$scope.dateOptions = {
+		startingDay : 1
+	};
+	
+
 } ]);

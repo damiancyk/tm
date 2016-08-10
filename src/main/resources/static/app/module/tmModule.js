@@ -1,4 +1,4 @@
-var app = angular.module('tm', [ 'ngRoute', 'ngTable' ]);
+var app = angular.module('tm', [ 'ngRoute', 'ui.bootstrap', 'ngTable' ]);
 
 app.config([ '$routeProvider', '$locationProvider', '$httpProvider',
 		function($routeProvider, $locationProvider, $httpProvider) {
