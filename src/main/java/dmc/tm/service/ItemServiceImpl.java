@@ -76,8 +76,8 @@ final class ItemServiceImpl implements ItemService {
 		entity.setId(vo.getId());
 		entity.setIdUser(vo.getIdUser());
 
-		Date start = DateUtils.strToDate(vo.getStart());
-		Date end = DateUtils.strToDate(vo.getEnd());
+		Date start = vo.getStart();
+		Date end = vo.getEnd();
 
 		entity.setStart(start);
 		entity.setEnd(end);
@@ -112,8 +112,10 @@ final class ItemServiceImpl implements ItemService {
 
 		vo.setId(entity.getId());
 		vo.setIdUser(entity.getIdUser());
-		vo.setStart(DateUtils.dateToStr(entity.getStart()));
-		vo.setEnd(DateUtils.dateToStr(entity.getEnd()));
+		vo.setStart(entity.getStart());
+		vo.setEnd(entity.getEnd());
+		vo.setStartDay(DateUtils.dateToStr(DateUtils.setZeroTimePart((entity.getStart()))));
+		vo.setEndDay(DateUtils.dateToStr(entity.getEnd()));
 		vo.setTitle(entity.getTitle());
 		vo.setDescription(entity.getDescription());
 		vo.setCreated(entity.getCreated());

@@ -6,8 +6,12 @@ public final class ItemVo {
 
 	private String id;
 	private String idUser;
-	private String start;
-	private String end;
+	private Date start;
+	private Date end;
+	private String startDay;
+	private String startHour;
+	private String endDay;
+	private String endHour;
 	private String title;
 	private String description;
 	private boolean note;
@@ -33,19 +37,19 @@ public final class ItemVo {
 		this.idUser = idUser;
 	}
 
-	public String getStart() {
+	public Date getStart() {
 		return start;
 	}
 
-	public void setStart(String start) {
+	public void setStart(Date start) {
 		this.start = start;
 	}
 
-	public String getEnd() {
+	public Date getEnd() {
 		return end;
 	}
 
-	public void setEnd(String end) {
+	public void setEnd(Date end) {
 		this.end = end;
 	}
 
@@ -79,6 +83,38 @@ public final class ItemVo {
 
 	public void setCreated(Date created) {
 		this.created = created;
+	}
+
+	public String getStartDay() {
+		return startDay;
+	}
+
+	public void setStartDay(String startDay) {
+		this.startDay = startDay;
+	}
+
+	public String getStartHour() {
+		return startHour;
+	}
+
+	public void setStartHour(String startHour) {
+		this.startHour = startHour;
+	}
+
+	public String getEndDay() {
+		return endDay;
+	}
+
+	public void setEndDay(String endDay) {
+		this.endDay = endDay;
+	}
+
+	public String getEndHour() {
+		return endHour;
+	}
+
+	public void setEndHour(String endHour) {
+		this.endHour = endHour;
 	}
 
 }
